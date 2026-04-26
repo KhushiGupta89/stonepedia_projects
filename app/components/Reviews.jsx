@@ -1,0 +1,194 @@
+"use client";
+
+import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
+const reviews = [
+  {
+    name: "Herry, Arthur",
+    role: "Marketing Coordinator",
+    image: "/logo.png",
+    review:
+      "Outstanding service! Professional, responsive team that boosted our online presence and rankings. Highly recommended",
+  },
+  {
+    name: "Kevin, Mathura",
+    role: "Sales Coordinator",
+    image: "/images/choose/choose1.png",
+    review:
+      "Outstanding service! Professional, responsive team that boosted our online presence and rankings. Highly recommended",
+  },
+  {
+    name: "Sarah Johnson",
+    role: "Project Manager",
+    image: "/logo.png",
+    review:
+      "Exceptional work quality and attention to detail. The team delivered beyond our expectations and timeline.",
+  },
+  {
+    name: "Michael Chen",
+    role: "CEO",
+    image: "/logo.png",
+    review:
+      "Professional expertise and outstanding results. Our business has grown significantly thanks to their solutions.",
+  },
+];
+
+export default function Review() {
+  const [index, setIndex] = useState(0);
+
+  const getCardsPerView = () => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth < 768) return 1;
+      if (window.innerWidth < 1024) return 2;
+      return 3;
+    }
+    return 3;
+  };
+
+  const [cardsPerView, setCardsPerView] = useState(getCardsPerView());
+
+  const maxIndex = Math.max(reviews.length - cardsPerView, 0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const newCards = getCardsPerView();
+      setCardsPerView(newCards);
+      setIndex(0);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const next = () => {
+    if (index < maxIndex) setIndex(index + 1);
+  };
+
+  const prev = () => {
+    if (index > 0) setIndex(index - 1);
+  };
+
+  return (
+    <div className="w-full overflow-hidden">
+      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-14">
+        {/* TOP */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
+          <button className="text-[#000000] border border-[#000000] px-5 py-2 rounded-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[22px] bg-white">
+            What Our Client Say
+          </button>
+
+          {/* Tablet/Desktop Arrows */}
+          <div className="hidden sm:flex gap-3">
+            <button
+              onClick={prev}
+              disabled={index === 0}
+              className={`w-11 h-11 rounded-full border flex items-center justify-center ${index === 0 ? "opacity-30 cursor-not-allowed" : ""
+                }`}
+            >
+              <FiChevronLeft className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={next}
+              disabled={index === maxIndex}
+              className={`w-11 h-11 rounded-full border flex items-center justify-center ${index === maxIndex ? "opacity-30 cursor-not-allowed" : ""
+                }`}
+            >
+              <FiChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* CONTENT */}
+        <div className="flex flex-col md:grid md:grid-cols-[220px_1fr] lg:grid-cols-[290px_1fr]  xl:grid-cols-[360px_1fr] mt-4 sm:mt-6 lg:mt-8 gap-8 lg:gap-0">
+          {/* LEFT */}
+          <div className="text-center lg:text-left">
+            <h2 className="font-semibold leading-snug text-[25px] md:text-[30px] lg:text-[40px] xl:text-[47px] 2xl:text-[55px]">
+              <span className="text-blue-500">Voices</span> That{" "}
+              <span className="hidden sm:inline">
+                <br />
+              </span>
+              Inspire
+            </h2>
+
+            <button className="cursor-pointer mt-6 bg-black text-white px-4 py-2 rounded-full text-sm md:text-sm xl:text-base">
+              Write a Review
+            </button>
+          </div>
+
+          {/* RIGHT SLIDER */}
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${index * (100 / cardsPerView)}%)`,
+              }}
+            >
+              {reviews.map((item, i) => (
+                <div
+                  key={i}
+                  className="min-w-full sm:min-w-[50%] lg:min-w-[33.33%] px-2"
+                >
+                  <div className="h-full bg-white border border-[#C9C9C9] rounded-[18px] p-4 flex flex-col justify-between min-h-[220px]">
+                    {/* USER */}
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        width={48}
+                        height={48}
+                        className="rounded-full object-cover w-10 h-10"
+                      />
+
+                      <div className="space-y-1">
+                        <h4 className="text-sm lg:text-[13px] xl:text-sm 2xl:text-[15px] text-black font-medium">
+                          {item.name}
+                        </h4>
+                        <p className="text-xs lg:text-[13px] xl:text-sm 2xl:text-[15px] text-[#595959]">
+                          {item.role}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* REVIEW */}
+                    <p className="mt-4 text-sm  md:text-[13px] xl:text-sm 2xl:text-[15px] text-gray-600 line-clamp-4">
+                      {item.review}
+                    </p>
+
+                    {/* STARS */}
+                    <div className="mt-4 text-[#FCBD06] text-base">
+                      ★ ★ ★ ★ <span className="text-gray-300">★</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile Arrows */}
+            <div className="flex sm:hidden justify-center gap-3 mt-5">
+              <button
+                onClick={prev}
+                disabled={index === 0}
+                className={`w-10 h-10 rounded-full border flex items-center justify-center ${index === 0 ? "opacity-30 cursor-not-allowed" : ""
+                  }`}
+              >
+                <FiChevronLeft />
+              </button>
+
+              <button
+                onClick={next}
+                disabled={index === maxIndex}
+                className={`w-10 h-10 rounded-full border flex items-center justify-center ${index === maxIndex ? "opacity-30 cursor-not-allowed" : ""
+                  }`}
+              >
+                <FiChevronRight />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
