@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
           <div className="hidden md:block">
 
             {/* Main Big Image */}
-            <div className="rounded-[20px] overflow-hidden md:pl-[120px] md:pr-[90px] h-full">
+            <div className="rounded-[20px] md:h-[400px] lg:h-full overflow-hidden md:pl-[120px] md:pr-[90px] h-full">
               <img
                 src="/images/choose/choose1.png"
                 alt="Interior"
@@ -92,7 +92,7 @@ export default function WhyChooseUs() {
             </div>
 
             {/* Right Image */}
-            <div className="absolute right-[-6px] xl:right-[-4px] top-[70px] lg:top-[25px] xl:top-[60px] z-30">
+            <div className="absolute right-[-6px] xl:right-[-4px] top-[35px]  lg:top-[25px] xl:top-[60px] z-30">
               <div className="w-[240px] lg:w-[340px] xl:w-[370px] 2xl:w-[370px] rounded-[26px] p-[8px]">
                 <img
                   src="/images/choose/choose2.png"

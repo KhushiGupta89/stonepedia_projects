@@ -37,7 +37,7 @@ export default function AboutUs() {
             </button>
 
             {/* TEXT */}
-            <p className="mt-6 md:mt-6 text-black text-sm md:text-[16px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px] max-w-[760px]">
+            <p className="mt-6 md:mt-6 text-black text-sm md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] max-w-[760px]">
               India’s first trusted platform for premium stones, expert installation, and verified dealers delivering quality, transparency, and a seamless experience from selection to finishing.
             </p>
 
@@ -52,7 +52,7 @@ export default function AboutUs() {
                     {item.value}
                   </h3>
 
-                  <div className="mt-4 md:mt-6">
+                  <div className="mt-2 md:mt-4">
                     <p className="text-[#777777] text-[14px] md:text-[14px]  lg:text-[16px] xl:text-[18px] 2xl:text-[20px] ">
                       {item.line1}
                     </p>
@@ -71,7 +71,7 @@ export default function AboutUs() {
             <img
               src="/images/aboutUs.png"
               alt="House Sketch"
-              className="w-full h-auto object-contain"
+              className="w-full h-full object-contain"
             />
           </div>
 

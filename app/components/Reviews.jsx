@@ -8,7 +8,7 @@ const reviews = [
   {
     name: "Herry, Arthur",
     role: "Marketing Coordinator",
-    image: "/logo.png",
+    image: "/images/choose/choose1.png",
     review:
       "Outstanding service! Professional, responsive team that boosted our online presence and rankings. Highly recommended",
   },
@@ -22,14 +22,14 @@ const reviews = [
   {
     name: "Sarah Johnson",
     role: "Project Manager",
-    image: "/logo.png",
+    image: "/images/choose/choose1.png",
     review:
       "Exceptional work quality and attention to detail. The team delivered beyond our expectations and timeline.",
   },
   {
     name: "Michael Chen",
     role: "CEO",
-    image: "/logo.png",
+       image: "/images/choose/choose1.png",
     review:
       "Professional expertise and outstanding results. Our business has grown significantly thanks to their solutions.",
   },
@@ -102,9 +102,9 @@ export default function Review() {
         </div>
 
         {/* CONTENT */}
-        <div className="flex flex-col md:grid md:grid-cols-[220px_1fr] lg:grid-cols-[290px_1fr]  xl:grid-cols-[360px_1fr] mt-4 sm:mt-6 lg:mt-8 gap-8 lg:gap-0">
+        <div className="flex flex-col md:grid md:grid-cols-[180px_1fr] lg:grid-cols-[290px_1fr]  xl:grid-cols-[360px_1fr] mt-4 sm:mt-6  md:mt-10  gap-8 lg:gap-0">
           {/* LEFT */}
-          <div className="text-center lg:text-left">
+          <div className="">
             <h2 className="font-semibold leading-snug text-[25px] md:text-[30px] lg:text-[40px] xl:text-[47px] 2xl:text-[55px]">
               <span className="text-blue-500">Voices</span> That{" "}
               <span className="hidden sm:inline">
@@ -113,7 +113,7 @@ export default function Review() {
               Inspire
             </h2>
 
-            <button className="cursor-pointer mt-6 bg-black text-white px-4 py-2 rounded-full text-sm md:text-sm xl:text-base">
+            <button className="cursor-pointer  mt-6 bg-black text-white px-4 py-2 rounded-full text-sm md:text-sm xl:text-base">
               Write a Review
             </button>
           </div>

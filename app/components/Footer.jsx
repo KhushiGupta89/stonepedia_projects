@@ -1,5 +1,5 @@
 "use client";
-
+import { FiArrowRight } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
 import { BiLogoFacebookSquare } from "react-icons/bi";
@@ -49,14 +49,14 @@ const locations = [
 
 const Footer = () => {
   return (
-    <footer className="w-full pt-20 md:pt-24 bg-white">
-      <div className="max-w-[1800px] mx-auto px-[23px] md:px-[60px] lg:px-24 xl:px-40">
+    <footer className="w-full pt-10 md:pt-24 bg-white">
+      <div className="max-w-[1800px] mx-auto px-[23px] md:px-[40px] lg:px-24 xl:px-40">
 
         {/* FLEX CONTAINER */}
         <div className="flex flex-col md:flex-row lg:flex-row justify-between gap-10 lg:gap-12">
 
           {/* LEFT */}
-          <div className="flex flex-col w-full md:w-[20%] lg:w-[25%] xl:w-[25%] xl:w-[30%] pt-6 lg:pt-12">
+          <div className="flex flex-col w-full md:w-[23%] lg:w-[25%] xl:w-[25%] xl:w-[30%] pt-6 lg:pt-12">
             <div className=" w-[130px] lg:w-[140px] xl:w-[170px] 2xl:w-[205px]">
               <Image
                 src="/logo.png"
@@ -87,7 +87,7 @@ const Footer = () => {
                     href={item.href}
                     target="_blank"
                     aria-label={item.label}
-                    className={`w-9 h-9 2xl:w-12 2xl:h-12 flex items-center justify-center text-white text-lg transition-all duration-300 hover:scale-105 ${styles}`}
+                    className={`w-9 h-9 md:w-8 md:h-8 2xl:w-12 2xl:h-12 flex items-center justify-center text-white text-lg transition-all duration-300 hover:scale-105 ${styles}`}
                   >
                     <Icon />
                   </Link>
@@ -97,17 +97,17 @@ const Footer = () => {
           </div>
 
           {/* COMPANY + LOCATION */}
-          <div className="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16 xl:gap-20 w-full md:w-[35%] lg:w-[35%] xl:w-[35%] 2xl:w-[30%] pt-6">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-16 xl:gap-20 w-full md:w-[27%] lg:w-[35%] xl:w-[35%] 2xl:w-[30%] pt-6">
             {/* COMPANY */}
             <div>
-              <h3 className="text-sm  xl:text-[16px] 2xl:text-[17px] font-bold text-[#141414] mb-4">
+              <h3 className="text-sm   md:text-[13px] lg:text-sm  xl:text-[16px] 2xl:text-[17px] font-bold text-[#141414] mb-4">
                 Company
               </h3>
               <ul className="space-y-2">
                 {companyLinks.map((item) => (
                   <li
                     key={item}
-                    className="text-sm xl:text-[16px] 2xl:text-[17px] text-[#202020B2] hover:text-black transition cursor-pointer"
+                    className="text-sm md:text-[13px] lg:text-sm  xl:text-[16px] 2xl:text-[17px] text-[#202020B2] hover:text-black transition cursor-pointer"
                   >
                     {item}
                   </li>
@@ -117,14 +117,14 @@ const Footer = () => {
 
             {/* LOCATION */}
             <div>
-              <h3 className="text-sm xl:text-[16px] 2xl:text-[17px]  font-bold text-[#141414] mb-4">
+              <h3 className="text-sm md:text-[13px] lg:text-sm xl:text-[16px] 2xl:text-[17px]  font-bold text-[#141414] mb-4">
                 Location
               </h3>
               <ul className="space-y-2">
                 {locations.map((item) => (
                   <li
                     key={item}
-                    className="text-sm xl:text-[16px] 2xl:text-[17px]  text-[#202020B2]"
+                    className="text-sm md:text-[13px]  lg:text-sm xl:text-[16px] 2xl:text-[17px]  text-[#202020B2]"
                   >
                     {item}
                   </li>
@@ -134,23 +134,24 @@ const Footer = () => {
           </div>
 
           {/* NOTIFICATIONS */}
-          <div className="bg-[#FBFBFB] rounded-[26px] p-4 sm:p-6 md:p-7 w-full md:w-[45%] lg:w-[45%] xl:w-[45%]">
+          <div className="bg-[#FBFBFB] rounded-[26px] p-4 sm:p-6 md:p-7 w-full md:w-[50%] lg:w-[45%] xl:w-[45%]">
             <h2 className="text-base md:text-sm lg:text-[18px] xl:text-[20px] 2xl:text-[24px] font-bold text-[#141414] mb-2">
               Notifications
             </h2>
 
-            <p className="text-sm md:text-[15px] xl:text-[16px] 2xl:text-[17px] text-[#141414] mb-4">
+            <p className="text-sm md:text-[13px] lg:text-sm xl:text-[16px] 2xl:text-[17px] text-[#141414] mb-4">
               Stay updated with our Notifications
             </p>
 
             <input
               type="email"
               placeholder="Email Address*"
-              className="w-full h-[48px] md:h-[54px] bg-[#F2F2F2] rounded-xl px-4 text-sm outline-none border border-transparent focus:border-black transition"
+              className="w-full py-3  bg-[#F2F2F2] rounded-xl px-4 text-sm outline-none border border-transparent focus:border-black transition"
             />
 
-            <button className="w-full h-[48px] md:h-[54px] mt-3 md:mt-4 bg-black text-white rounded-xl text-sm md:text-[15px] xl:text-[16px] 2xl:text-[17px] font-semibold hover:opacity-90 transition cursor-pointer">
-              Contact US →
+            <button className="w-full py-3 mt-3 md:mt-4 bg-black text-white rounded-xl text-sm md:text-[15px] xl:text-[16px] 2xl:text-[17px] font-semibold hover:opacity-90 transition cursor-pointer flex items-center justify-center gap-2">
+              Contact US
+              <FiArrowRight className="text-[20px]" />
             </button>
 
             <p className="text-[10px] lg:text-[12px] xl:text-[13px] 2xl:text-[15px] text-[#141414] mt-5">
@@ -174,7 +175,7 @@ const Footer = () => {
 
         {/* DESKTOP BOTTOM */}
         <div className="hidden md:flex mt-10 mb-5 relative flex-row items-center justify-between text-sm text-gray-500 text-left">
-          <p className="absolute left-20 lg:left-45 text-sm xl:text-[16px] 2xl:text-[17px] text-[#3C3C3C]">
+          <p className="absolute left-20 lg:left-45 text-sm md:text-[13px] xl:text-[16px] 2xl:text-[17px] text-[#3C3C3C]">
             &copy; 2024 Stonepedia Projects. All Rights Reserved.
           </p>
 

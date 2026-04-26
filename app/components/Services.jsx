@@ -20,7 +20,7 @@ export default function Services() {
 
     return (
         <div className="w-full">
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-[23px] md:px-[24px] lg:px-8 xl:px-14 mt-6 sm:mt-8 md:mt-8">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-[23px] md:px-[24px] lg:px-8 xl:px-14 mt-4 md:mt-4">
 
                 {/* Top Button */}
                 <div className="mt-6 mb-6 sm:mt-8 sm:mb-8 md:mt-8 md:mb-8 ">

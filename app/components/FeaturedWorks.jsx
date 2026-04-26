@@ -48,7 +48,7 @@ export default function FeaturedWorks() {
     <div className="w-full overflow-hidden">
       <div className="max-w-[1800px] mx-auto px-[23px] md:px-[24px] lg:px-8 xl:px-14">
 
-        <div className="mt-6 sm:mt-8 md:mt-8">
+        <div className="mt-6 sm:mt-8 md:mt-4">
           <button className="text-[#000000] border border-[#000000] px-6 py-2 rounded-full  text-base md:text-base lg:text-lg xl:text-[20px] 2xl:text-[22px] bg-white">
             Featured Works
           </button>
