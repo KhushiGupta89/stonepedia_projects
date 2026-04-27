@@ -37,7 +37,7 @@ export default function AboutUs() {
             </button>
 
             {/* TEXT */}
-            <p className="mt-6 md:mt-6 text-black text-sm md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] max-w-[760px]">
+            <p className="mt-6 md:mt-6 text-black text-sm md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] lg:max-w-[760px]">
               India’s first trusted platform for premium stones, expert installation, and verified dealers delivering quality, transparency, and a seamless experience from selection to finishing.
             </p>
 

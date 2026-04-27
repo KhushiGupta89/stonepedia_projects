@@ -23,7 +23,7 @@ export default function Services() {
             <div className="max-w-[1800px] mx-auto px-4 sm:px-[23px] md:px-[24px] lg:px-8 xl:px-14 mt-4 md:mt-4">
 
                 {/* Top Button */}
-                <div className="mt-6 mb-6 sm:mt-8 sm:mb-8 md:mt-8 md:mb-8 ">
+                <div className="mt-4 mb-6 sm:mt-8 sm:mb-8 md:mt-8 md:mb-8 ">
                     <button className="text-[#000000] border border-[#000000] px-6 py-2 rounded-full  text-base md:text-base lg:text-lg xl:text-[20px] 2xl:text-[22px] bg-white">
                         Our services
                     </button>

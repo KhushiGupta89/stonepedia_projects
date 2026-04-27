@@ -398,14 +398,19 @@ export default function Projects() {
 
     // responsive cards
     const visibleCount = isLgUp ? 4 : isMdUp ? 2 : 1;
+    const maxIndex = Math.max(0, images.length - visibleCount);
+
+    useEffect(() => {
+        setIndex((prev) => Math.max(0, Math.min(prev, maxIndex)));
+    }, [maxIndex]);
 
     // infinite loop
     const next = () => {
-        setIndex((prev) => (prev + 1) % images.length);
+        setIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     };
 
     const prev = () => {
-        setIndex((prev) => (prev - 1 + images.length) % images.length);
+        setIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
     };
 
     // autoplay all devices
@@ -418,52 +423,15 @@ export default function Projects() {
     }, [index]);
 
     return (
-        <section className="w-full px-[23px] md:px-[24px] lg:px-8 xl:px-10 poverflow-hidden">
+        <section className="w-full px-[23px] md:px-[24px] lg:px-8 xl:px-10 overflow-hidden">
             <div className="max-w-[1800px] mx-auto">
                 {/* Heading */}
-                {/* <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    viewport={{ once: true }}
-                    className="text-center"
-                >
-                    <h1 className="text-[23px] md:text-[30px] xl:text-[32px] 2xl:text-[42px] font-medium leading-[1.2] text-black">
-                        Where Your Imagination Comes <br />
-                        Alive Through{" "}
-                        <span className="inline-flex items-center gap-2">
-                            <Image
-                                src="/images/projects/center-img.png"
-                                alt=""
-                                width={160}
-                                height={60}
-                                className="w-[100px] md:w-[140px] xl:w-[130px] 2xl:w-[160px] h-auto"
-                            />
-                            Expert
-                        </span>
-                        <br />
-                        Stone Installation
-                    </h1>
-
-                    <p className="max-w-[620px] mx-auto text-gray-500 text-xs md:text-sm mt-3">
-                        Transform your space with Stonepedia’s professionally crafted stone
-                        projects. Our team ensures accurate measurements, flawless cutting,
-                        and perfect installation.
-                    </p>
-                </motion.div> */}
                 <div className="text-center w-full ">
                     <h1 className="text-[23px] md:text-[30px] leading-[1.2] lg:text-[28px] xl:text-[32px] 2xl:text-[42px] font-medium text-[#000000] ">
                         Where Your Imagination Comes{" "}
                         <br />
                         Alive Through{" "}
                         <span className="inline-flex justify-center items-center gap-2 align-middle">
-                            {/* <Image
-                                src="/images/projects/center-img.png"
-                                alt=""
-                                width={160}
-                                height={60}
-                                className="w-[100px] md:w-[140px] lg:w-[160px] h-auto object-contain align-middle"
-                            /> */}
                             <Image
                                 src="/images/projects/center-img.png"
                                 alt=""
@@ -494,14 +462,14 @@ export default function Projects() {
                     <div className="flex gap-2">
                         <button
                             onClick={prev}
-                            className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
+                            className="w-10 h-10 md:w-12 md:h-12 cursor-pinter rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
                         >
                             <FiChevronLeft />
                         </button>
 
                         <button
                             onClick={next}
-                            className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
+                            className="w-10 h-10 md:w-12 md:h-12 cursor-pinter rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
                         >
                             <FiChevronRight />
                         </button>
@@ -529,7 +497,7 @@ export default function Projects() {
                                 }}
                                 transition={{ duration: 0.4 }}
                                 className="relative shrink-0 rounded-2x cursor-pointer
-                w-full md:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)]
+                w-full md:w-[calc(50%-8px)] lg:w-[calc(25%-12px)]
                 h-[240px] md:h-[280px] lg:h-[300px] xl:h-[330px] 2xl:h-[340px] group"
                             >
                                 <Image
@@ -547,7 +515,7 @@ export default function Projects() {
 
                 {/* Dots */}
                 <div className="flex justify-center mt-8 gap-2">
-                    {images.map((_, i) => (
+                    {Array.from({ length: maxIndex + 1 }).map((_, i) => (
                         <div
                             key={i}
                             className={`h-2 rounded-full transition-all duration-500 ${i === index ? "w-8 bg-black" : "w-2 bg-gray-300"

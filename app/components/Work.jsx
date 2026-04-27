@@ -45,7 +45,7 @@ export default function Work() {
                 </div>
 
                 {/* Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 lg:gap-8 pb-28 md:pb-32 lg:pb-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 lg:gap-8 pb-22 md:pb-20 lg:pb-20">
                     {workCards.map((card) => (
                         <div
                             key={card.id}

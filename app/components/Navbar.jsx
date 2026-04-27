@@ -71,7 +71,7 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
 
               {/* CONTACT BUTTON (hide mobile) */}
-              <button className="hidden sm:flex items-center gap-2 bg-black text-white px-4 md:px-5 py-2 rounded-full text-xs md:text-sm    2xl:text-[16px] font-medium cursor-pointer">
+              <button className="hidden sm:flex items-center gap-2 bg-black text-white px-4 md:px-4 xl:px-5 py-2 rounded-full text-xs md:text-sm  lg:text-sm   2xl:text-[16px] font-medium cursor-pointer">
                 Contact us
                 <span className="bg-white text-black rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center">
                   <FiArrowUpRight className="text-[12px] md:text-[14px]" />
@@ -124,7 +124,8 @@ const Navbar = () => {
 
           {/* LINKS */}
           <div className="flex flex-col text-[#000000] p-4 text-sm">
-            <button onClick={() => scrollToSection('projects')} className="text-left py-2 border-b border-gray-300 hover:pl-2 transition-all">Projects</button>
+            <button onClick={() => scrollToSection('projects')} className="text-left 
+            py-2 border-b border-gray-300 hover:pl-2 transition-all">Projects</button>
 
             <button onClick={() => scrollToSection('work')} className="text-left py-2 border-b border-gray-300 hover:pl-2 transition-all">Work</button>
 
