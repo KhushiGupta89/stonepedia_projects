@@ -139,9 +139,9 @@ export default function Review() {
               Inspire
             </h2>
 
-            <button className="cursor-pointer  mt-6 bg-black text-white px-4 py-2 rounded-full text-sm md:text-sm xl:text-base">
+            {/* <button className="cursor-pointer  mt-6 bg-black text-white px-4 py-2 rounded-full text-sm md:text-sm xl:text-base">
               Write a Review
-            </button>
+            </button> */}
           </div>
 
           {/* RIGHT SLIDER */}
