@@ -459,7 +459,7 @@ export default function Projects() {
                         Our Projects
                     </button>
 
-                    <div className="flex gap-2">
+                    <div className=" md:hidden flex gap-2">
                         <button
                             onClick={prev}
                             className="w-10 h-10 md:w-12 md:h-12 cursor-pinter rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white active:scale-95 transition"
@@ -514,7 +514,7 @@ export default function Projects() {
                 </div>
 
                 {/* Dots */}
-                <div className="flex justify-center mt-8 gap-2">
+                <div className="flex md:hidden justify-center mt-8 gap-2">
                     {Array.from({ length: maxIndex + 1 }).map((_, i) => (
                         <div
                             key={i}

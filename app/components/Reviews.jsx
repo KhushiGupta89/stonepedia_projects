@@ -3,35 +3,61 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FaStar } from "react-icons/fa";
+
+const reviewImageByName = {
+  "Nitin Singh": "/images/reviews/nitin.png",
+  "vaidika 20": "/images/reviews/vaidika 20.png",
+  "sumit khanagwal": "/images/reviews/sumit khanagwal.png",
+  "Sudhir Maurya": "/images/reviews/Sudhir Maurya.png",
+  "Abhimanyu Dhull": "/images/reviews/Abhimanyu Dhull.png",
+};
+
+const getReviewImage = (name) => {
+  return reviewImageByName[name] || "/images/choose/choose1.png";
+};
 
 const reviews = [
   {
-    name: "Herry, Arthur",
-    role: "Marketing Coordinator",
-    image: "/images/choose/choose1.png",
+    name: "Nitin Singh",
+    date: "2024-12-15",
+    image: getReviewImage("Nitin Singh"),
     review:
-      "Outstanding service! Professional, responsive team that boosted our online presence and rankings. Highly recommended",
+      "Hassle free services/ Great Customer support/ After sales service awesome!",
   },
   {
-    name: "Kevin, Mathura",
-    role: "Sales Coordinator",
-    image: "/images/choose/choose1.png",
-    review:
-      "Outstanding service! Professional, responsive team that boosted our online presence and rankings. Highly recommended",
+    name: "vaidika 20",
+    date: "2024-12-15",
+    image: getReviewImage("vaidika 20"),
+    review: "Exceptional Quality and Service from Stonepedia! Stonepedia exceeded my expectations with their outstanding service and exceptional variety of marbles. Their creativity and attention to detail truly set them apart. The team is incredibly reliable, professional, and honest, making the entire process smooth and stress-free.A heartfelt thank you to the Stonepedia team for their dedication and hard work. If you’re looking for a company that combines quality, creativity,",
   },
   {
-    name: "Sarah Johnson",
-    role: "Project Manager",
-    image: "/images/choose/choose1.png",
+    name: "sumit khanagwal",
+    date: "2024-12-15",
+    image: getReviewImage("sumit khanagwal"),
     review:
-      "Exceptional work quality and attention to detail. The team delivered beyond our expectations and timeline.",
+      "This user only left a rating.",
   },
   {
-    name: "Michael Chen",
-    role: "CEO",
-       image: "/images/choose/choose1.png",
+    name: "Sudhir Maurya",
+    date: "2024-12-15",
+    image: getReviewImage("Sudhir Maurya"),
     review:
-      "Professional expertise and outstanding results. Our business has grown significantly thanks to their solutions.",
+      "The quality of stone is amazing. My house got just renovated with Stonepedia Projects. All process was so easy and nice.",
+  },
+  {
+    name: "Abhimanyu Dhull",
+    date: "2024-12-04",
+    image: getReviewImage("Abhimanyu Dhull"),
+    review:
+      "Stonepedia's professionalism and experience is what sets it apart from other companies. My experience with them has been wonderful.",
+  },
+  {
+    name: "Arvind Duggal",
+    date: "2024-12-04",
+    image: getReviewImage("Abhimanyu Dhull"),
+    review:
+      "Very best work you done in stone marketing.",
   },
 ];
 
@@ -84,7 +110,7 @@ export default function Review() {
             <button
               onClick={prev}
               disabled={index === 0}
-              className={`w-11 h-11 rounded-full border flex items-center justify-center ${index === 0 ? "opacity-30 cursor-not-allowed" : ""
+              className={`w-11 h-11 rounded-full cursor-pointer border flex items-center justify-center ${index === 0 ? "opacity-30 cursor-not-allowed" : ""
                 }`}
             >
               <FiChevronLeft className="w-5 h-5" />
@@ -93,7 +119,7 @@ export default function Review() {
             <button
               onClick={next}
               disabled={index === maxIndex}
-              className={`w-11 h-11 rounded-full border flex items-center justify-center ${index === maxIndex ? "opacity-30 cursor-not-allowed" : ""
+              className={`w-11 h-11 cursor-pointer rounded-full border flex items-center justify-center ${index === maxIndex ? "opacity-30 cursor-not-allowed" : ""
                 }`}
             >
               <FiChevronRight className="w-5 h-5" />
@@ -147,7 +173,7 @@ export default function Review() {
                           {item.name}
                         </h4>
                         <p className="text-xs lg:text-[13px] xl:text-sm 2xl:text-[15px] text-[#595959]">
-                          {item.role}
+                          {item.date}
                         </p>
                       </div>
                     </div>
@@ -158,8 +184,10 @@ export default function Review() {
                     </p>
 
                     {/* STARS */}
-                    <div className="mt-4 text-[#FCBD06] text-base">
-                      ★ ★ ★ ★ <span className="text-gray-300">★</span>
+                    <div className="mt-4 text-[#FCBD06] text-lg flex items-center gap-1">
+                      {Array.from({ length: 5 }).map((_, starIndex) => (
+                        <FaStar key={starIndex} />
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -171,7 +199,7 @@ export default function Review() {
               <button
                 onClick={prev}
                 disabled={index === 0}
-                className={`w-10 h-10 rounded-full border flex items-center justify-center ${index === 0 ? "opacity-30 cursor-not-allowed" : ""
+                className={`w-10 h-10 cursor-pointer rounded-full border flex items-center justify-center ${index === 0 ? "opacity-30 cursor-not-allowed" : ""
                   }`}
               >
                 <FiChevronLeft />
@@ -180,7 +208,7 @@ export default function Review() {
               <button
                 onClick={next}
                 disabled={index === maxIndex}
-                className={`w-10 h-10 rounded-full border flex items-center justify-center ${index === maxIndex ? "opacity-30 cursor-not-allowed" : ""
+                className={`w-10 h-10 cursor-pointer rounded-full border flex items-center justify-center ${index === maxIndex ? "opacity-30 cursor-not-allowed" : ""
                   }`}
               >
                 <FiChevronRight />

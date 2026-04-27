@@ -71,7 +71,10 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
 
               {/* CONTACT BUTTON (hide mobile) */}
-              <button className="hidden sm:flex items-center gap-2 bg-black text-white px-4 md:px-4 xl:px-5 py-2 rounded-full text-xs md:text-sm  lg:text-sm   2xl:text-[16px] font-medium cursor-pointer">
+              <button
+                onClick={() => scrollToSection("contact-us")}
+                className="hidden sm:flex items-center gap-2 bg-black text-white px-4 md:px-4 xl:px-5 py-2 rounded-full text-xs  lg:text-sm   2xl:text-[16px] font-medium cursor-pointer"
+              >
                 Contact us
                 <span className="bg-white text-black rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center">
                   <FiArrowUpRight className="text-[12px] md:text-[14px]" />
@@ -135,7 +138,10 @@ const Navbar = () => {
 
             <button onClick={() => scrollToSection('about-us')} className="text-left py-2 border-b border-gray-300 hover:pl-2 transition-all border-b-0">About Us</button>
             {/* MOBILE BUTTON */}
-            <button className="mt-6 flex items-center justify-center gap-2 bg-black text-white py-3 rounded-full">
+            <button
+              onClick={() => scrollToSection("contact-us")}
+              className="mt-6 flex items-center justify-center gap-2 bg-black text-white py-3 rounded-full"
+            >
               Contact us <FiArrowUpRight className="text-sm" />
 
             </button>

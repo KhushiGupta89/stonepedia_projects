@@ -19,7 +19,7 @@ export const socialLinks = [
     label: "Instagram",
   },
   {
-    href: "https://x.com/stonepediaofficial",
+    href: "https://x.com/Stonepedia52820",
     icon: FaXTwitter,
     label: "Twitter",
   },
@@ -48,16 +48,26 @@ const locations = [
 ];
 
 const Footer = () => {
+  const scrollToSection = (sectionId) => {
+    if (typeof window === "undefined") return;
+
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="w-full pt-10 md:pt-24 bg-white">
       <div className="max-w-[1800px] mx-auto px-[23px] md:px-[40px] lg:px-24 xl:px-40">
 
         {/* FLEX CONTAINER */}
+        {/* <div className="flex flex-col md:flex-row lg:flex-row justify-between gap-10 lg:gap-12"> */}
         <div className="flex flex-col md:flex-row lg:flex-row justify-between gap-10 lg:gap-12">
 
           {/* LEFT */}
           <div className="flex flex-col w-full md:w-[23%] lg:w-[25%] xl:w-[25%] xl:w-[30%] pt-6 lg:pt-12">
-            <div className=" w-[130px] lg:w-[140px] xl:w-[170px] 2xl:w-[205px]">
+            <div className=" w-[130px] lg:w-[140px] xl:w-[170px] 2xl:w-[205px] mx-auto md:mx-0">
               <Image
                 src="/logo.png"
                 alt="Stonepedia Logo"
@@ -68,7 +78,7 @@ const Footer = () => {
             </div>
 
             {/* SOCIAL ICONS */}
-            <div className="flex mt-6 md:mt-40 items-center gap-3">
+            <div className="flex mt-6 md:mt-40 items-center gap-3 justify-center md:justify-start">
               {socialLinks.map((item) => {
                 const Icon = item.icon;
 
@@ -97,7 +107,7 @@ const Footer = () => {
           </div>
 
           {/* COMPANY + LOCATION */}
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-16 xl:gap-20 w-full md:w-[27%] lg:w-[35%] xl:w-[35%] 2xl:w-[30%] pt-6">
+          <div className="flex  justify-between md:justify-start flex-row  gap-6 md:gap-8 lg:gap-16 xl:gap-20 w-full md:w-[27%] lg:w-[35%] xl:w-[35%] 2xl:w-[30%] pt-6">
             {/* COMPANY */}
             <div>
               <h3 className="text-sm   md:text-[13px] lg:text-sm  xl:text-[16px] 2xl:text-[17px] font-bold text-[#141414] mb-4">
@@ -109,7 +119,13 @@ const Footer = () => {
                     key={item}
                     className="text-sm md:text-[13px] lg:text-sm  xl:text-[16px] 2xl:text-[17px] text-[#202020B2] hover:text-black transition cursor-pointer"
                   >
-                    {item}
+                    {item === "Contact Us" ? (
+                      <button type="button" onClick={() => scrollToSection("contact-us")}>
+                        {item}
+                      </button>
+                    ) : (
+                      item
+                    )}
                   </li>
                 ))}
               </ul>
@@ -134,7 +150,7 @@ const Footer = () => {
           </div>
 
           {/* NOTIFICATIONS */}
-          <div className="bg-[#FBFBFB] rounded-[26px] p-4 sm:p-6 md:p-7 w-full md:w-[50%] lg:w-[45%] xl:w-[45%]">
+          {/* <div className="bg-[#FBFBFB] rounded-[26px] p-4 sm:p-6 md:p-7 w-full md:w-[50%] lg:w-[45%] xl:w-[45%]">
             <h2 className="text-base md:text-sm lg:text-[18px] xl:text-[20px] 2xl:text-[24px] font-bold text-[#141414] mb-2">
               Notifications
             </h2>
@@ -158,7 +174,7 @@ const Footer = () => {
               By subscribing you agree with our privacy policy and provide
               consent to receive updates from our company.
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* BOTTOM */}
