@@ -57,12 +57,12 @@ export default function ContactUs() {
                     {/* Left */}
                     <div className="w-full xl:w-[55%] text-white md:flex md:flex-col md:items-center lg:text-start lg:items-start md:text-center">
                         <div className="mt-6 sm:mt-8 xl:mt-10 md:flex md:justify-center">
-                            <button className="text-[#FFFFFF] border border-[#FFFFFF] px-6 py-2 rounded-full  text-base md:text-base lg:text-lg xl:text-[20px] 2xl:text-[22px]  ">
+                            <button className="text-[#FFFFFF] border border-[#FFFFFF] px-6 py-2 rounded-full text-base md:text-base lg:text-lg xl:text-[20px] 2xl:text-[22px]">
                                 Get in touch
                             </button>
                         </div>
 
-                        <h1 className="text-[25px] mt-4  md:text-[30px] lg:text-[34px] xl:text-[36px] 2xl:text-[44px] font-semibold leading-tight mb-4 md:mb-2 md:mb-[35px]">
+                        <h1 className="text-[25px] mt-4 md:text-[30px] lg:text-[34px] xl:text-[36px] 2xl:text-[44px] font-semibold leading-tight mb-4 md:mb-2 md:mb-[35px]">
                             Have Questions? We’re Here <br />to Help
                         </h1>
 
@@ -76,48 +76,55 @@ export default function ContactUs() {
                     {/* Right */}
                     <div className="w-full mt-4 md:mt-6 xl:mt-[20px] md:mx-auto sm:max-w-[520px] lg:max-w-[380px] xl:max-w-[430px] 2xl:max-w-[520px] rounded-[24px] p-[1px] bg-[#FFFFFF] via-gray-100 to-gray-300 shadow-lg">
                         <div className="bg-white/80 backdrop-blur-md rounded-[24px] p-4 sm:p-6">
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-3">
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                                
                                 {/* Full Name */}
-                                <label className="text-xs md:text-sm 2xl:text-sm text-[#1E1E1E] font-medium">
-                                    Full Name
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter your name"
-                                    name="fullName"
-                                    value={form.fullName}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full md:text-sm 2xl:text-sm border border-gray-200 rounded-lg px-4 py-2 md:py-2 text-xs bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/40 focus:border-black transition duration-200"
-                                />
+                                <div className="flex flex-col gap-0.5">
+                                    <label className="text-xs md:text-sm 2xl:text-sm text-[#1E1E1E] font-medium">
+                                        Full Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter your name"
+                                        name="fullName"
+                                        value={form.fullName}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full md:text-sm 2xl:text-sm border border-gray-200 rounded-lg px-4 py-2 text-xs bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/40 focus:border-black transition duration-200"
+                                    />
+                                </div>
 
                                 {/* Email */}
-                                <label className="text-xs md:text-sm 2xl:text-sm text-[#1E1E1E] font-medium">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    placeholder="example@gmail.com"
-                                    name="email"
-                                    value={form.email}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full md:text-sm border border-gray-200 rounded-lg px-4 py-2 md:py-2 text-xs 2xl:text-sm bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/40 focus:border-black transition duration-200"
-                                />
+                                <div className="flex flex-col gap-0.5">
+                                    <label className="text-xs md:text-sm 2xl:text-sm text-[#1E1E1E] font-medium">
+                                        Email
+                                    </label>
+                                    <input
+                                        type="email"
+                                        placeholder="example@gmail.com"
+                                        name="email"
+                                        value={form.email}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full md:text-sm border border-gray-200 rounded-lg px-4 py-2 text-xs 2xl:text-sm bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/40 focus:border-black transition duration-200"
+                                    />
+                                </div>
 
                                 {/* Message */}
-                                <label className="text-xs md:text-sm 2xl:text-sm text-[#1E1E1E] font-medium">
-                                    Message
-                                </label>
-                                <textarea
-                                    rows="3"
-                                    placeholder="Write your message..."
-                                    name="message"
-                                    value={form.message}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full md:text-sm border border-gray-200 rounded-lg px-4 py-2 md:py-2 text-xs 2xl:text-sm bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/40 focus:border-black transition duration-200"
-                                ></textarea>
+                                <div className="flex flex-col gap-0.5">
+                                    <label className="text-xs md:text-sm 2xl:text-sm text-[#1E1E1E] font-medium">
+                                        Message
+                                    </label>
+                                    <textarea
+                                        rows="3"
+                                        placeholder="Write your message..."
+                                        name="message"
+                                        value={form.message}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full md:text-sm border border-gray-200 rounded-lg px-4 py-2 text-xs 2xl:text-sm bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black/40 focus:border-black transition duration-200"
+                                    ></textarea>
+                                </div>
 
                                 {/* Button */}
                                 <button
