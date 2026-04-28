@@ -1,3 +1,6 @@
+// app/api/contact/route.js
+// npm install xlsx
+
 import fs from "fs";
 import path from "path";
 import * as XLSX from "xlsx";
@@ -8,9 +11,12 @@ export async function POST(request) {
   try {
     const body = await request.json();
 
-    const fullName = typeof body?.fullName === "string" ? body.fullName.trim() : "";
-    const email = typeof body?.email === "string" ? body.email.trim() : "";
-    const message = typeof body?.message === "string" ? body.message.trim() : "";
+    const fullName =
+      typeof body?.fullName === "string" ? body.fullName.trim() : "";
+    const email =
+      typeof body?.email === "string" ? body.email.trim() : "";
+    const message =
+      typeof body?.message === "string" ? body.message.trim() : "";
 
     if (!fullName || !email || !message) {
       return Response.json(
@@ -26,82 +32,82 @@ export async function POST(request) {
       fs.mkdirSync(dirPath, { recursive: true });
     }
 
-    const newRow = {
-      Full_Name: fullName,
-      Email: email,
-      Message: message,
-      Date: new Date().toLocaleString(),
-    };
-
     let workbook;
 
     if (fs.existsSync(filePath)) {
-      try {
-        workbook = XLSX.readFile(filePath);
-      } catch (readErr) {
-        const code = readErr?.code;
-        const msg = typeof readErr?.message === "string" ? readErr.message : "";
-        if (
-          code === "EPERM" ||
-          code === "EBUSY" ||
-          code === "EACCES" ||
-          msg.toLowerCase().includes("cannot access file")
-        ) {
-          return Response.json(
-            {
-              ok: false,
-              error:
-                "Cannot access contact-data.xlsx. Close the file if it is open (e.g., in Excel) and try again.",
-            },
-            { status: 423 }
-          );
-        }
-        throw readErr;
-      }
+      workbook = XLSX.readFile(filePath);
     } else {
       workbook = XLSX.utils.book_new();
     }
 
     const sheetName = "Contacts";
+
     const existingSheet = workbook.Sheets[sheetName];
+
     const existingRows = existingSheet
       ? XLSX.utils.sheet_to_json(existingSheet)
       : [];
 
-    const updatedRows = [...existingRows, newRow];
-    const updatedSheet = XLSX.utils.json_to_sheet(updatedRows);
+    const nextSerial = existingRows.length + 1;
 
-    workbook.Sheets[sheetName] = updatedSheet;
+    const requestedDate = new Date().toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const newRow = {
+      "S.No": nextSerial,
+      Name: fullName,
+      Email: email,
+      Message: message,
+      "Requested Date": requestedDate,
+      Status: "Not Contacted",
+      "Contacted Date": "",
+    };
+
+    const updatedRows = [...existingRows, newRow];
+
+    const worksheet = XLSX.utils.json_to_sheet(updatedRows);
+
+    // column widths
+    worksheet["!cols"] = [
+      { wch: 8 },
+      { wch: 25 },
+      { wch: 30 },
+      { wch: 45 },
+      { wch: 22 },
+      { wch: 18 },
+      { wch: 22 },
+    ];
+
+    workbook.Sheets[sheetName] = worksheet;
+
     if (!workbook.SheetNames.includes(sheetName)) {
       workbook.SheetNames.push(sheetName);
     }
 
-    try {
-      const wbBuffer = XLSX.write(workbook, {
-        bookType: "xlsx",
-        type: "buffer",
-      });
-      fs.writeFileSync(filePath, wbBuffer);
-    } catch (writeErr) {
-      const code = writeErr?.code;
-      if (code === "EPERM" || code === "EBUSY" || code === "EACCES") {
-        return Response.json(
-          {
-            ok: false,
-            error:
-              "Cannot save contact-data.xlsx. Close the file if it is open (e.g., in Excel) and try again.",
-          },
-          { status: 423 }
-        );
-      }
-      throw writeErr;
-    }
+    const buffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "buffer",
+    });
 
-    return Response.json({ ok: true });
-  } catch (err) {
-    console.error("/api/contact error:", err);
+    fs.writeFileSync(filePath, buffer);
+
+    return Response.json({
+      ok: true,
+      message: "Submitted successfully",
+    });
+  } catch (error) {
+    console.error("Contact API Error:", error);
+
     return Response.json(
-      { ok: false, error: err?.message || "Server error" },
+      {
+        ok: false,
+        error: "Server error",
+      },
       { status: 500 }
     );
   }
