@@ -55,7 +55,7 @@ const reviews = [
   {
     name: "Arvind Duggal",
     date: "2024-12-04",
-    image: getReviewImage("Abhimanyu Dhull"),
+    image: "/images/reviews/Arvind Duggal.png",
     review:
       "Very best work you done in stone marketing.",
   },
@@ -63,6 +63,7 @@ const reviews = [
 
 export default function Review() {
   const [index, setIndex] = useState(0);
+  const [selectedReview, setSelectedReview] = useState(null);
 
   const getCardsPerView = () => {
     if (typeof window !== "undefined") {
@@ -88,6 +89,17 @@ export default function Review() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setSelectedReview(null);
+    };
+
+    if (selectedReview) {
+      window.addEventListener("keydown", onKeyDown);
+      return () => window.removeEventListener("keydown", onKeyDown);
+    }
+  }, [selectedReview]);
+
   const next = () => {
     if (index < maxIndex) setIndex(index + 1);
   };
@@ -98,6 +110,41 @@ export default function Review() {
 
   return (
     <div className="w-full overflow-hidden">
+      {selectedReview ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center px-4"
+          onClick={() => setSelectedReview(null)}
+        >
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
+          <div
+            className="relative w-full max-w-xl rounded-2xl bg-white shadow-2xl border border-gray-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-end gap-4 p-5 border-b border-gray-100">
+
+              <button
+                onClick={() => setSelectedReview(null)}
+                className="shrink-0 cursor-pointer rounded-lg px-3 py-1.5 text-sm border border-gray-200 hover:bg-gray-50"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="p-5">
+              <p className="text-sm sm:text-base text-gray-700 whitespace-pre-wrap leading-relaxed">
+                {selectedReview.review}
+              </p>
+
+              <div className="mt-5 text-[#FCBD06] text-lg flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, starIndex) => (
+                  <FaStar key={starIndex} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 md:px-8 lg:px-8 xl:px-14">
         {/* TOP */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
@@ -155,9 +202,9 @@ export default function Review() {
               {reviews.map((item, i) => (
                 <div
                   key={i}
-                  className="min-w-full sm:min-w-[50%] lg:min-w-[33.33%] px-2"
+                  className="min-w-full sm:min-w-[50%] lg:min-w-[33.33%] px-2 flex"
                 >
-                  <div className="h-full bg-white border border-[#C9C9C9] rounded-[18px] p-4 flex flex-col justify-between min-h-[220px]">
+                  <div className="h-full w-full bg-white border border-[#C9C9C9] rounded-[18px] p-4 flex flex-col">
                     {/* USER */}
                     <div className="flex items-center gap-3">
                       <Image
@@ -179,12 +226,23 @@ export default function Review() {
                     </div>
 
                     {/* REVIEW */}
-                    <p className="mt-4 text-sm  md:text-[13px] xl:text-sm 2xl:text-[15px] text-gray-600 line-clamp-4">
-                      {item.review}
-                    </p>
+                    <div className="mt-4 flex flex-col flex-1">
+                      <p className="text-sm  md:text-[13px] xl:text-[13px] 2xl:text-[15px] text-gray-600 line-clamp-4">
+                        {item.review}
+                      </p>
+
+                      {typeof item.review === "string" && item.review.length > 140 ? (
+                        <button
+                          onClick={() => setSelectedReview(item)}
+                          className="mt-2 cursor-pointer text-sm md:text-[13px] text-black underline underline-offset-4 hover:opacity-80 text-left"
+                        >
+                          Read more
+                        </button>
+                      ) : null}
+                    </div>
 
                     {/* STARS */}
-                    <div className="mt-4 text-[#FCBD06] text-lg flex items-center gap-1">
+                    <div className="mt-auto pt-4 text-[#FCBD06] text-lg flex items-center gap-1">
                       {Array.from({ length: 5 }).map((_, starIndex) => (
                         <FaStar key={starIndex} />
                       ))}

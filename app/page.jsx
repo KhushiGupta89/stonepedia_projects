@@ -35,10 +35,10 @@ export default function Home() {
         <FeaturedWorks />
       </div>
 
-      <div id="about-us" className="scroll-mt-20 pb-10 lg:pb-16" >
+      <div id="about-us" className="scroll-mt-20 pb-4 lg:pb-8" >
         <AboutUs />
       </div>
-       <div id="contact-us" className="scroll-mt-20 pb-10 lg:pb-16" >
+      <div id="contact-us" className="scroll-mt-20 pb-10 lg:pb-16" >
         <ContactUs />
       </div>
 

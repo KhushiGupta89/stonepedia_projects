@@ -60,7 +60,7 @@ export default function ContactUs() {
             >
                 <div className="absolute inset-0 bg-black/55 z-0"></div>
 
-                <div className="relative z-10 h-full flex flex-col lg:flex-row justify-between items-center xl:items-start gap-8 md:gap-10 px-4 sm:px-6 md:px-6 lg:px-[35px] xl:px-[40px] 2xl:px-[70px] py-2 lg:py-8 xl:py-10">
+                <div className="relative z-10 h-full flex flex-col lg:flex-row justify-between items-center xl:items-start gap-8 md:gap-10 px-4 sm:px-6 md:px-6 lg:px-[35px] xl:px-[40px] 2xl:px-[70px] py-2 lg:py-4 xl:py-6">
                     <div className="w-full xl:w-[55%] text-white md:flex md:flex-col md:items-center lg:text-start lg:items-start md:text-center">
                         <div className="mt-6 sm:mt-8 xl:mt-10 md:flex md:justify-center">
                             <button className="text-[#FFFFFF] border border-[#FFFFFF] px-6 py-2 rounded-full text-base md:text-base lg:text-lg xl:text-[20px] 2xl:text-[22px]">
@@ -79,7 +79,7 @@ export default function ContactUs() {
                         </p>
                     </div>
 
-                    <div className="w-full mt-4 md:mt-6 xl:mt-[20px] md:mx-auto sm:max-w-[520px] lg:max-w-[380px] xl:max-w-[430px] 2xl:max-w-[520px] rounded-[24px] p-[1px] bg-[#FFFFFF] via-gray-100 to-gray-300 shadow-lg">
+                    <div className="w-full mt-0 md:mt-2 xl:mt-[12px] md:mx-auto sm:max-w-[520px] lg:max-w-[380px] xl:max-w-[430px] 2xl:max-w-[520px] rounded-[24px] p-[1px] bg-[#FFFFFF] via-gray-100 to-gray-300 shadow-lg">
                         <div className="bg-white/80 backdrop-blur-md rounded-[24px] p-4 sm:p-6">
                             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                                 <div className="flex flex-col gap-0.5">
