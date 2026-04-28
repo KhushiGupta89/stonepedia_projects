@@ -76,7 +76,7 @@ export default function ContactUs() {
                     {/* Right */}
                     <div className="w-full mt-4 md:mt-6 xl:mt-[20px] md:mx-auto sm:max-w-[520px] lg:max-w-[380px] xl:max-w-[430px] 2xl:max-w-[520px] rounded-[24px] p-[1px] bg-[#FFFFFF] via-gray-100 to-gray-300 shadow-lg">
                         <div className="bg-white/80 backdrop-blur-md rounded-[24px] p-4 sm:p-6">
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                                 
                                 {/* Full Name */}
                                 <div className="flex flex-col gap-0.5">
