@@ -130,7 +130,7 @@ export default function ContactUs() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="mt-4 py-1.5 md:py-2 cursor-pointer rounded-lg text-xs md:text-sm lg:text-sm xl:text-[16px] font-medium bg-black text-white hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] transition duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                                    className="mt-4 py-2 cursor-pointer rounded-lg text-xs md:text-sm lg:text-sm xl:text-[16px] font-medium bg-black text-white hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] transition duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
                                     Let’s Connect
                                 </button>
