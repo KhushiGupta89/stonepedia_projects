@@ -1,11 +1,23 @@
-// app/api/contact/route.js
-// npm install xlsx
-
-import fs from "fs";
-import path from "path";
-import * as XLSX from "xlsx";
+import { google } from "googleapis";
 
 export const runtime = "nodejs";
+
+function getGoogleAuth() {
+  const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL;
+  const privateKeyRaw = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
+
+  if (!clientEmail || !privateKeyRaw) {
+    return null;
+  }
+
+  const privateKey = privateKeyRaw.replace(/\\n/g, "\n");
+
+  return new google.auth.JWT({
+    email: clientEmail,
+    key: privateKey,
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+}
 
 export async function POST(request) {
   try {
@@ -17,6 +29,12 @@ export async function POST(request) {
       typeof body?.email === "string" ? body.email.trim() : "";
     const message =
       typeof body?.message === "string" ? body.message.trim() : "";
+    const status =
+      body?.status === "Contacted" || body?.status === "Not Contacted"
+        ? body.status
+        : "Not Contacted";
+    const contactedDate =
+      typeof body?.contactedDate === "string" ? body.contactedDate.trim() : "";
 
     if (!fullName || !email || !message) {
       return Response.json(
@@ -24,31 +42,38 @@ export async function POST(request) {
         { status: 400 }
       );
     }
+    const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+    const range = process.env.GOOGLE_SHEETS_RANGE || "Contacts!A:G";
 
-    const dirPath = path.join(process.cwd(), "data");
-    const filePath = path.join(dirPath, "contact-data.xlsx");
-
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
+    if (!spreadsheetId) {
+      return Response.json(
+        { ok: false, error: "Missing GOOGLE_SHEETS_SPREADSHEET_ID" },
+        { status: 500 }
+      );
     }
 
-    let workbook;
-
-    if (fs.existsSync(filePath)) {
-      workbook = XLSX.readFile(filePath);
-    } else {
-      workbook = XLSX.utils.book_new();
+    const auth = getGoogleAuth();
+    if (!auth) {
+      return Response.json(
+        {
+          ok: false,
+          error:
+            "Missing Google Sheets credentials. Set GOOGLE_SHEETS_CLIENT_EMAIL and GOOGLE_SHEETS_PRIVATE_KEY.",
+        },
+        { status: 500 }
+      );
     }
 
-    const sheetName = "Contacts";
+    const sheets = google.sheets({ version: "v4", auth });
 
-    const existingSheet = workbook.Sheets[sheetName];
-
-    const existingRows = existingSheet
-      ? XLSX.utils.sheet_to_json(existingSheet)
+    const countRes = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range,
+    });
+    const existingValues = Array.isArray(countRes.data?.values)
+      ? countRes.data.values
       : [];
-
-    const nextSerial = existingRows.length + 1;
+    const nextSerial = existingValues.length;
 
     const requestedDate = new Date().toLocaleString("en-IN", {
       day: "2-digit",
@@ -58,57 +83,31 @@ export async function POST(request) {
       minute: "2-digit",
     });
 
-    const newRow = {
-      "S.No": nextSerial,
-      Name: fullName,
-      Email: email,
-      Message: message,
-      "Requested Date": requestedDate,
-      Status: "Not Contacted",
-      "Contacted Date": "",
-    };
-
-    const updatedRows = [...existingRows, newRow];
-
-    const worksheet = XLSX.utils.json_to_sheet(updatedRows);
-
-    // column widths
-    worksheet["!cols"] = [
-      { wch: 8 },
-      { wch: 25 },
-      { wch: 30 },
-      { wch: 45 },
-      { wch: 22 },
-      { wch: 18 },
-      { wch: 22 },
+    const values = [
+      [
+        nextSerial,
+        fullName,
+        email,
+        message,
+        requestedDate,
+        status,
+        status === "Contacted" ? contactedDate : "",
+      ],
     ];
 
-    workbook.Sheets[sheetName] = worksheet;
-
-    if (!workbook.SheetNames.includes(sheetName)) {
-      workbook.SheetNames.push(sheetName);
-    }
-
-    const buffer = XLSX.write(workbook, {
-      bookType: "xlsx",
-      type: "buffer",
+    await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range,
+      valueInputOption: "USER_ENTERED",
+      insertDataOption: "INSERT_ROWS",
+      requestBody: { values },
     });
 
-    fs.writeFileSync(filePath, buffer);
-
-    return Response.json({
-      ok: true,
-      message: "Submitted successfully",
-    });
+    return Response.json({ ok: true, message: "Submitted successfully" });
   } catch (error) {
     console.error("Contact API Error:", error);
-
-    return Response.json(
-      {
-        ok: false,
-        error: "Server error",
-      },
-      { status: 500 }
-    );
+    const message =
+      typeof error?.message === "string" ? error.message : "Server error";
+    return Response.json({ ok: false, error: message }, { status: 500 });
   }
 }
